@@ -1,7 +1,7 @@
 ######################################
 # target
 ######################################
-TARGET = gd32f470zgt6
+TARGET = GD32F407VET6
 
 
 ######################################
@@ -59,7 +59,7 @@ User/main.c \
 User/systick.c
 
 # ASM sources
-ASM_SOURCES = Firmware/CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f450_470.S
+ASM_SOURCES = Firmware/CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f407_427.S
 
 
 #######################################
@@ -104,7 +104,7 @@ AS_DEFS =
 # C defines
 C_DEFS =  \
 -DUSE_STDPERIPH_DRIVER \
--DGD32F470
+-DGD32F407
 
 
 # AS includes
@@ -183,8 +183,8 @@ program_openocd:
 	openocd -f /usr/share/openocd/scripts/interface/cmsis-dap.cfg -f /usr/share/openocd/scripts/target/stm32f4x.cfg -c "program build/$(TARGET).elf verify reset exit"
 
 program_pyocd:
-	pyocd erase -c -t gd32f450zg --config pyocd.yaml
-	pyocd load build/$(TARGET).hex -t gd32f450zg --config pyocd.yaml
+	pyocd erase -c -t gd32f407ve --config pyocd.yaml
+	pyocd load build/$(TARGET).hex -t gd32f407ve --config pyocd.yaml
 
 #######################################
 # clean up
