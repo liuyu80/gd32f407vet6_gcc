@@ -19,6 +19,6 @@ int main(void)
 
     while(1) {
         gpio_bit_toggle(GPIOE, GPIO_PIN_0);
-        delay_1ms(1000);
+        delay_1ms(100);
     }
 }
