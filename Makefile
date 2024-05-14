@@ -54,9 +54,18 @@ Firmware/GD32F4xx_standard_peripheral/Source/gd32f4xx_trng.c \
 Firmware/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c \
 Firmware/GD32F4xx_standard_peripheral/Source/gd32f4xx_wwdgt.c \
 Firmware/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c \
-User/gd32f4xx_it.c \
-User/main.c \
-User/systick.c
+Utilities/FreeRTOS/portable/GCC/ARM_CM4F/port.c \
+Utilities/FreeRTOS/portable/MemMang/heap_4.c \
+Utilities/FreeRTOS/croutine.c \
+Utilities/FreeRTOS/event_groups.c \
+Utilities/FreeRTOS/list.c \
+Utilities/FreeRTOS/queue.c \
+Utilities/reeRTOS/stream_buffer.c \
+Utilities/FreeRTOS/tasks.c \
+Utilities/FreeRTOS/timers.c \
+APP/gd32f4xx_it.c \
+APP/main.c \
+APP/systick.c
 
 # ASM sources
 ASM_SOURCES = Firmware/CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f407_427.S
@@ -89,10 +98,10 @@ BIN = $(CP) -O binary -S
 CPU = -mcpu=cortex-m4
 
 # fpu
-# NONE for Cortex-M0/M0+/M3
+FPU = -mfpu=fpv4-sp-d16
 
 # float-abi
-
+FLOAT-ABI = -mfloat-abi=hard
 
 # mcu
 MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
@@ -116,7 +125,9 @@ C_INCLUDES =  \
 -IFirmware/CMSIS/Include \
 -IFirmware/CMSIS/GD/GD32F4xx/Include/ \
 -IFirmware/CMSIS \
--IUser
+-IUtilities/FreeRTOS/portable/GCC/ARM_CM4F \
+-IUtilities/FreeRTOS/include \
+-IAPP 
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
@@ -174,15 +185,13 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(BIN) $< $@	
 	
 $(BUILD_DIR):
-	mkdir $@		
+	mkdir $@
 
 #######################################
 # program
 #######################################
-program_openocd:
-	openocd -f /usr/share/openocd/scripts/interface/cmsis-dap.cfg -f /usr/share/openocd/scripts/target/stm32f4x.cfg -c "program build/$(TARGET).elf verify reset exit"
 
-program_pyocd:
+program:
 	pyocd erase -c -t gd32f407ve --config pyocd.yaml
 	pyocd load build/$(TARGET).hex -t gd32f407ve --config pyocd.yaml
 
