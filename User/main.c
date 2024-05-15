@@ -30,29 +30,31 @@ int main(void)
     gpio_bit_reset(GPIOE, GPIO_PIN_3);
     gpio_bit_reset(GPIOG, GPIO_PIN_3);
 
+    uint8_t timeOut = 0;
     while(1) {
         gpio_bit_set(GPIOA, GPIO_PIN_5);
         gpio_bit_reset(GPIOG, GPIO_PIN_3);
         gpio_bit_reset(GPIOD, GPIO_PIN_7);
         gpio_bit_reset(GPIOE, GPIO_PIN_3);
-        delay_1ms(400);
+        delay_1ms(400+timeOut);
 
         gpio_bit_set(GPIOG, GPIO_PIN_3);
         gpio_bit_reset(GPIOD, GPIO_PIN_7);
         gpio_bit_reset(GPIOE, GPIO_PIN_3);
         gpio_bit_reset(GPIOA, GPIO_PIN_5);
-        delay_1ms(400);
+        delay_1ms(400+timeOut);
 
         gpio_bit_set(GPIOD, GPIO_PIN_7);
         gpio_bit_reset(GPIOE, GPIO_PIN_3);
         gpio_bit_reset(GPIOA, GPIO_PIN_5);
         gpio_bit_reset(GPIOG, GPIO_PIN_3);
-        delay_1ms(400);
+        delay_1ms(400+timeOut);
 
         gpio_bit_set(GPIOE, GPIO_PIN_3);
         gpio_bit_reset(GPIOA, GPIO_PIN_5);
         gpio_bit_reset(GPIOG, GPIO_PIN_3);
         gpio_bit_reset(GPIOD, GPIO_PIN_7);
-        delay_1ms(400);
+        delay_1ms(400+timeOut);
+        timeOut++;
     }
 }
