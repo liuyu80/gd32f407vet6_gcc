@@ -1,0 +1,26 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${env:ARM_GCC_PATH}/../arm-none-eabi/include",
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Firmware/GD32F4xx_standard_peripheral/Include",
+                "${workspaceFolder}/Firmware/CMSIS/GD/GD32F4xx/Include",
+                "${workspaceFolder}/Firmware/CMSIS",
+                "${workspaceFolder}/Utilities/FreeRTOS/portable/GCC/ARM_CM4F",
+                "${workspaceFolder}/Utilities/FreeRTOS/include",
+                "${workspaceFolder}/APP"
+            ],
+            "defines": [
+                "USE_STDPERIPH_DRIVER",
+                "GD32F407"
+            ],
+            "compilerPath": "${env:ARM_GCC_PATH}/arm-none-eabi-gcc.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++14",
+            "intelliSenseMode": "windows-gcc-arm"
+        }
+    ],
+    "version": 4
+}

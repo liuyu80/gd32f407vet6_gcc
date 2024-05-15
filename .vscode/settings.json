@@ -12,7 +12,6 @@
         "i3/*.conf": "i3",
         "polybar/config": "ini",
         "polybar/*.conf": "ini",
-        "freertos.h": "c",
-        "task.h": "c"
+        "freertos.h": "c"
     }
 }
