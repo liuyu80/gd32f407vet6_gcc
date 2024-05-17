@@ -5,16 +5,56 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Cortex Debug",
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceRoot}",
             "executable": "./build/gd32f470zgt6.elf",
+            "name": "Debug with OpenOCD",
             "request": "launch",
             "type": "cortex-debug",
+            "servertype": "openocd",
+            "configFiles": [
+                // "D:/Program Files/OpenOCD/share/openocd/scripts/interface/cmsis-dap.cfg",
+                // "D:/Program Files/OpenOCD/share/openocd/scripts/target/stm32f4x.cfg"
+                "./openocd.cfg"
+            ],
+            "searchDir": [],
             "runToEntryPoint": "main",
-            "servertype": "pyocd",
-            "targetId":"gd32f450zg",
-            "showDevDebugOutput": "both",
-            "preLaunchTask": "build"
+            "showDevDebugOutput": "none",
+            "rttConfig": {
+                "enabled": true,
+                "address": "auto",
+                "clearSearch": false,
+                "decoders": [
+                    {
+                        "label": "",
+                        "port": 0,
+                        "type": "console"
+                    }
+                ]
+            }
         }
+        // {
+        //     "name": "Cortex Debug",
+        //     "cwd": "${workspaceFolder}",
+        //     "executable": "./build/gd32f470zgt6.elf",
+        //     "request": "launch",
+        //     "type": "cortex-debug",
+        //     "runToEntryPoint": "main",
+        //     "servertype": "pyocd",
+        //     "targetId":"gd32f450zg",
+        //     "showDevDebugOutput": "both",
+        //     "preLaunchTask": "build",
+        //     "rttConfig": {
+        //         "enabled": true,
+        //         "address": "auto",
+        //         "clearSearch": false,
+        //         "decoders": [
+        //             {
+        //                 "label": "",
+        //                 "port": 0,
+        //                 "type": "console"
+        //             }
+        //         ]
+        //     }
+        // }
     ]
 }

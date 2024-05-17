@@ -48,6 +48,17 @@
             ],
             "dependsOrder": "sequence", // 代表是依次执行，不设置会并行执行
             "problemMatcher": []
-          }
+        },
+        {
+            "label": "rtt",
+            "type": "shell",
+            "command": "pyocd",
+            "args": [
+                "rtt",
+                "-t",
+                "gd32f450zg"
+            ],
+            "problemMatcher": []
+        }
     ]
 }

@@ -54,12 +54,16 @@ Firmware/GD32F4xx_standard_peripheral/Source/gd32f4xx_trng.c \
 Firmware/GD32F4xx_standard_peripheral/Source/gd32f4xx_usart.c \
 Firmware/GD32F4xx_standard_peripheral/Source/gd32f4xx_wwdgt.c \
 Firmware/CMSIS/GD/GD32F4xx/Source/system_gd32f4xx.c \
+Utilities/segger-rtt/RTT/SEGGER_RTT_printf.c \
+Utilities/segger-rtt/RTT/SEGGER_RTT.c \
 User/gd32f4xx_it.c \
 User/main.c \
 User/systick.c
 
 # ASM sources
-ASM_SOURCES = Firmware/CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f450_470.S
+ASM_SOURCES = \
+Firmware/CMSIS/GD/GD32F4xx/Source/GCC/startup_gd32f450_470.S \
+Utilities/segger-rtt/RTT/SEGGER_RTT_ASM_ARMv7M.S 
 
 
 #######################################
@@ -116,6 +120,8 @@ C_INCLUDES =  \
 -IFirmware/CMSIS/Include \
 -IFirmware/CMSIS/GD/GD32F4xx/Include/ \
 -IFirmware/CMSIS \
+-IUtilities/segger-rtt/Config \
+-IUtilities/segger-rtt/RTT \
 -IUser
 
 # compile gcc flags
@@ -180,7 +186,7 @@ $(BUILD_DIR):
 # program
 #######################################
 program_openocd:
-	openocd -f /usr/share/openocd/scripts/interface/cmsis-dap.cfg -f /usr/share/openocd/scripts/target/stm32f4x.cfg -c "program build/$(TARGET).elf verify reset exit"
+	openocd -f "D:/Program Files/OpenOCD/share/openocd/scripts/interface/cmsis-dap.cfg" -f "D:/Program Files/OpenOCD/share/openocd/scripts/target/stm32f4x.cfg" -c "program build/$(TARGET).elf verify reset exit"
 
 program_pyocd:
 	pyocd erase -c -t gd32f450zg --config pyocd.yaml
