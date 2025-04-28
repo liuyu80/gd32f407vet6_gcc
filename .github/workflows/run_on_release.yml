@@ -1,0 +1,31 @@
+name: Publish release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install arm-none-eabi-gc
+        uses: carlosperate/arm-none-eabi-gcc-action@v1
+      - name: Verify version
+        run: arm-none-eabi-gcc --version
+      - name: build make
+        run: make
+      - name: ls path
+        run: ls Build/
+      - name: pack
+        run: |
+          zip -r output.zip Build/GD32F407VET6.bin Build/GD32F407VET6.hex Build/GD32F407VET6.elf
+          ls .
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: |
+            output.zip
