@@ -29,5 +29,6 @@ jobs:
           token: ${{ secrets.RELEASE_TOKEN }}
           body_path: ./CHANGELOG.md
           files: |
-            output.zip
+            ./output.zip
+            ./CHANGELOG.md
 
